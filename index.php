@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="author" content="Korigan Payne"/>
-		<meta name="description" content=""/>
+		<meta name="description" content="Data Design Project"/>
 		<link href="styles/style.css" rel="stylesheet" type="text/css"/>
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
 		<title>Data Design Project</title>
