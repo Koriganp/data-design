@@ -27,15 +27,17 @@
 			<p>Jared is also looking for a place to meet people that share his interests when he is not working. He wants to
 			know where the classier places to frequent are, and if there is an opinion of the residents of the city which is
 			the best for his personality and interests.</p>
-			<h2>Frustrations</h2>
-			<ul>
-				<li>Wants something easy to search, post to, and make comments</li>
-				<li>Slow loading speed</li>
-				<li>Lack of 4G coverage</li>
-			</ul>
+			<h1>Frustrations</h1>
+			<div class="centerList">
+				<ul>
+					<li>Wants something easy to search, post to, and make comments</li>
+					<li>Slow loading speed</li>
+					<li>Lack of 4G coverage</li>
+				</ul>
+			</div>
 
 			<h1>User Story</h1>
-			<p>A site user looking for a nice restaurant in Albuquerque.</p>
+			<p class="centerList">A site user looking for a nice restaurant in Albuquerque.</p>
 
 			<h1>Use Case/Interaction Flow</h1>
 			<div class="centerList">
