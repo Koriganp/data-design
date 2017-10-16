@@ -40,6 +40,8 @@
 			<h1>Use Case/Interaction Flow</h1>
 			<div class="centerList">
 				<ul>
+					<li>Jared accesses site</li>
+					<li>Server sends page for browser to display</li>
 					<li>Jared creates a post</li>
 					<li>Site displays post</li>
 					<li>User X comments on his post</li>
