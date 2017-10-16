@@ -1,0 +1,13 @@
+html {
+	font-size: 1em;
+	font-family: 'Raleway', sans-serif;
+	text-align: justify;
+}
+
+/*resize image for page*/
+#jared {
+	max-width: 40%;
+	max-height: 40%;
+	display: block;
+	margin: 0 auto;
+}
