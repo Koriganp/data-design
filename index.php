@@ -19,6 +19,12 @@
 			<p>Jared also enjoys taking his clients out to extravagant places to eat, because he is also a foodie. He loves fine
 			dining as well as the low-key places that no one really knows about but the food loving community. Jared also likes
 			night life and enjoys meeting new people and having a good time.</p>
+			<h2>Frustrations</h2>
+			<ul>
+				<li>Wants something easy to search, post to, and make comments</li>
+				<li>Slow loading speed</li>
+				<li>Lack of 4G coverage</li>
+			</ul>
 
 			<h1>User Story</h1>
 			<p>Because Mr. Mason is often in places that he hasn't been or has only been to a few times, he wants a way to
