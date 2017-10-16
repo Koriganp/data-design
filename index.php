@@ -51,6 +51,29 @@
 					<li>Many users can comment on many posts</li>
 					<li>Many users can comment on many comments</li>
 				</ul>
+				<h2>Profile</h2>
+				<ul>
+					<li>profileId (primary key)</li>
+					<li>profileUserName</li>
+					<li>profileActivationToken</li>
+					<li>profileEmail</li>
+					<li>profileHash</li>
+					<li>profileSalt</li>
+				</ul>
+				<h2>Post</h2>
+				<ul>
+					<li>postId (primary key)</li>
+					<li>postProfileId (foreign key)</li>
+					<li>postContent</li>
+					<li>postDate</li>
+				</ul>
+				<h2>Comment</h2>
+				<ul>
+					<li>commentProfileId (foreign key)</li>
+					<li>commentPostId (foreign key)</li>
+					<li>commentDate</li>
+				</ul>
+
 			</div>
 
 		</main>
