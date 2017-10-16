@@ -56,9 +56,9 @@
 			<h1>Conceptual Model</h1>
 			<div class="centerList">
 				<ul>
-					<li>One user can post many times</li>
-					<li>Many users can comment on many posts</li>
-					<li>Many users can comment on many comments</li>
+					<li>One user can post many times (1 to <var>n</var>)</li>
+					<li>Many users can comment on many posts (<var>m</var> to <var>n</var>)</li>
+					<li>Many users can comment on many comments (<var>m</var> to <var>n</var>)</li>
 				</ul>
 				<h2>Profile</h2>
 				<ul>
