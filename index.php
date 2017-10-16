@@ -35,7 +35,7 @@
 					<li>Lack of 4G coverage</li>
 				</ul>
 				<h1>User Story</h1>
-					<p>A site user looking for a nice restaurant in Albuquerque.</p>
+					<p id="story">A site user looking for a nice restaurant in Albuquerque.</p>
 			</div>
 
 			<h1>Use Case/Interaction Flow</h1>
@@ -82,6 +82,7 @@
 				<ul>
 					<li>commentProfileId (foreign key)</li>
 					<li>commentPostId (foreign key)</li>
+					<li>commentContent</li>
 					<li>commentDate</li>
 				</ul>
 			</div>
