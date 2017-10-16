@@ -11,3 +11,12 @@ html {
 	display: block;
 	margin: 0 auto;
 }
+
+h1 {
+	text-align: center;
+}
+
+p {
+	padding: 15px 100px;
+	text-align: justify;
+}
