@@ -34,10 +34,9 @@
 					<li>Slow loading speed</li>
 					<li>Lack of 4G coverage</li>
 				</ul>
+				<h1>User Story</h1>
+					<p>A site user looking for a nice restaurant in Albuquerque.</p>
 			</div>
-
-			<h1>User Story</h1>
-			<p class="centerList">A site user looking for a nice restaurant in Albuquerque.</p>
 
 			<h1>Use Case/Interaction Flow</h1>
 			<div class="centerList">
@@ -55,13 +54,14 @@
 				</ul>
 			</div>
 
-			<h1>Conceptual Model</h1>
+			<h1>Relations</h1>
 			<div class="centerList">
 				<ul>
-					<li>One user can post many times (1 to <var>n</var>)</li>
-					<li>Many users can comment on many posts (<var>m</var> to <var>n</var>)</li>
-					<li>Many users can comment on many comments (<var>m</var> to <var>n</var>)</li>
+					<li>One user can post many times (<strong>1 to <var>n</var></strong>)</li>
+					<li>One user can comment on many posts (<strong>1 to <var>n</var></strong>)</li>
+					<li>One user can comment on many comments (<strong>1 to <var>n</var></strong>)</li>
 				</ul>
+				<h1>Conceptual Model</h1>
 				<h2>Profile</h2>
 				<ul>
 					<li>profileId (primary key)</li>
@@ -84,7 +84,6 @@
 					<li>commentPostId (foreign key)</li>
 					<li>commentDate</li>
 				</ul>
-
 			</div>
 
 		</main>
