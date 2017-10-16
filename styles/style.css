@@ -20,3 +20,14 @@ p {
 	padding: 15px 100px;
 	text-align: justify;
 }
+
+/*Added <div> tag to allow centering of child elements*/
+.centerList {
+	text-align: center;
+}
+
+/*Centered list*/
+ul {
+	display: inline-block;
+	text-align: left;
+}

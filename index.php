@@ -31,20 +31,27 @@
 			the best for his personality and interests.</p>
 
 			<h1>Use Case/Interaction Flow</h1>
-			<ul>
-				<li>Jared goes to the reddit website</li>
-				<li>Site prompts user to login</li>
-				<li>Jared enters his username and password</li>
-				<li>Site redirects to Jared's user page with search bar</li>
-				<li>Jared types in the city he is traveling to</li>
-				<li>Site goes to page of that city</li>
-				<li>Jared creates a post asking where the best places to dine are</li>
-				<li>User X comments on his post</li>
-				<li>User Y comments on User X's comment</li>
-				<li>User Z comments on Jared's post</li>
-			</ul>
+			<div class="centerList">
+				<ul>
+					<li>Jared creates a post</li>
+					<li>Site displays post</li>
+					<li>User X comments on his post</li>
+					<li>Site displays comment on post</li>
+					<li>User Y comments on User X's comment</li>
+					<li>Site displays User Y's comment</li>
+					<li>User Z comments on Jared's post</li>
+					<li>Site displays comment on post</li>
+				</ul>
+			</div>
 
 			<h1>Conceptual Model</h1>
+			<div class="centerList">
+				<ul>
+					<li>One user can post many times</li>
+					<li>Many users can comment on many posts</li>
+					<li>Many users can comment on many comments</li>
+				</ul>
+			</div>
 
 		</main>
 	</body>
