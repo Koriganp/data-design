@@ -86,6 +86,7 @@
 					<li>commentDate</li>
 				</ul>
 			</div>
+			<img id="erd" src="images/data-design-erd.PNG" alt="Entity Relationship Diagram"/>
 
 		</main>
 	</body>
