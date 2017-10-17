@@ -78,12 +78,12 @@
 					<li>postContent</li>
 					<li>postDate</li>
 				</ul>
-				<h2>Comment</h2>
+				<h2>Comments</h2>
 				<ul>
-					<li>commentProfileId (foreign key)</li>
-					<li>commentPostId (foreign key)</li>
-					<li>commentContent</li>
-					<li>commentDate</li>
+					<li>commentsProfileId (foreign key)</li>
+					<li>commentsPostId (foreign key)</li>
+					<li>commentsContent</li>
+					<li>commentsDate</li>
 				</ul>
 			</div>
 			<img id="erd" src="images/data-design-erd.PNG" alt="Entity Relationship Diagram"/>
