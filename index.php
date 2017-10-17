@@ -80,6 +80,7 @@
 				</ul>
 				<h2>Comments</h2>
 				<ul>
+					<li>commentsId</li>
 					<li>commentsProfileId (foreign key)</li>
 					<li>commentsPostId (foreign key)</li>
 					<li>commentsContent</li>

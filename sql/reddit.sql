@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS profile;
-DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS comments;
-
+-- DROP TABLE IF EXISTS profile;
+-- DROP TABLE IF EXISTS post;
+-- DROP TABLE IF EXISTS comments;
 
 CREATE TABLE profile (
 	profileId BINARY(16) NOT NULL ,
@@ -26,6 +25,7 @@ CREATE TABLE post (
 );
 
 CREATE TABLE comments (
+	commentsId BINARY(16) NOT NULL,
 	commentsProfileId BINARY(16) NOT NULL,
 	commentsPostId BINARY(16) NOT NULL,
 	commentsContent VARCHAR(65535) NOT NULL,
@@ -34,5 +34,5 @@ CREATE TABLE comments (
 	INDEX(commentsPostId),
 	FOREIGN KEY(commentsProfileId) REFERENCES profile(profileId),
 	FOREIGN KEY(commentsPostId) REFERENCES post(postId),
-	PRIMARY KEY(commentsProfileId, commentsPostId)
-)
+	PRIMARY KEY(commentsId)
+);
