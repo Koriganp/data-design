@@ -53,3 +53,35 @@ INSERT INTO comments(commentsId, commentsProfileId, commentsPostId, commentsCont
 	UNHEX(REPLACE('ab1af7cf-7ffc-48e1-b7da-95f8fe8f7b68', '-', '')), 'This is a comment', '20171017'
 	);
 
+SELECT profileEmail, profileUserName, profileId
+	FROM profile
+	WHERE profileEmail LIKE 'JaredM%';
+
+SELECT postId, postContent, postDate
+	FROM post
+	WHERE postDate = '20171017';
+
+SELECT commentsId, commentsContent, commentsDate
+	FROM comments
+	WHERE commentsContent LIKE '%is a%';
+
+UPDATE profile
+	SET profileUserName = 'JMason'
+	WHERE profileId = '9f9a39971ef44ae79a875c28fe6cbefc';
+
+UPDATE post
+	SET postContent = 'This is a better post'
+	WHERE postId = 'ab1af7cf7ffc48e1b7da95f8fe8f7b68';
+
+UPDATE comments
+	SET commentsContent = 'I actually meant to say this'
+	WHERE commentsId = '4a1e57df5b2b4ef8a9f638988d8db707';
+
+DELETE FROM profile
+	WHERE profileId = '9f9a39971ef44ae79a875c28fe6cbefc';
+
+DELETE FROM post
+	WHERE postId = 'ab1af7cf7ffc48e1b7da95f8fe8f7b68';
+
+DELETE FROM comments
+	WHERE commentsId = '4a1e57df5b2b4ef8a9f638988d8db707';
