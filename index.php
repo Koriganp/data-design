@@ -27,6 +27,8 @@
 			<p>Jared is also looking for a place to meet people that share his interests when he is not working. He wants to
 			know where the classier places to frequent are, and if there is an opinion of the residents of the city which is
 			the best for his personality and interests.</p>
+			<h1>User Tech</h1>
+			<p id="story">Jared has an Acer Aspire V Nitro Laptop, and uses a Samsung Galaxy S8 for his phone.</p>
 			<h1>Frustrations</h1>
 			<div class="centerList">
 				<ul>
