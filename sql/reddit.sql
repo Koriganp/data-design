@@ -45,12 +45,12 @@ INSERT INTO profile(profileId, profileActivationToken, profileUserName, profileE
 
 INSERT INTO post(postId, postProfileId, postContent, postDate)
 	VALUES (UNHEX(REPLACE('ab1af7cf-7ffc-48e1-b7da-95f8fe8f7b68', '-', '')), UNHEX(REPLACE('9f9a3997-1ef4-4ae7-9a87-5c28fe6cbefc', '-', '')),
-	'This is a post', '20171017'
+	'This is a post', '2017-10-17'
 );
 
 INSERT INTO comments(commentsId, commentsProfileId, commentsPostId, commentsContent, commentsDate)
 	VALUES (UNHEX(REPLACE('4a1e57df-5b2b-4ef8-a9f6-38988d8db707', '-', '')), UNHEX(REPLACE('9f9a3997-1ef4-4ae7-9a87-5c28fe6cbefc', '-', '')),
-	UNHEX(REPLACE('ab1af7cf-7ffc-48e1-b7da-95f8fe8f7b68', '-', '')), 'This is a comment', '20171017'
+	UNHEX(REPLACE('ab1af7cf-7ffc-48e1-b7da-95f8fe8f7b68', '-', '')), 'This is a comment', '2017-10-17'
 	);
 
 SELECT profileEmail, profileUserName, profileId
