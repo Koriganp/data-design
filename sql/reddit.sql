@@ -59,7 +59,7 @@ SELECT profileEmail, profileUserName, profileId
 
 SELECT postId, postContent, postDate
 	FROM post
-	WHERE postDate = '20171017';
+	WHERE postDate = '2017-10-17';
 
 SELECT commentsId, commentsContent, commentsDate
 	FROM comments
