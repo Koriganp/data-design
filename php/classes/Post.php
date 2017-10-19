@@ -42,8 +42,9 @@ class Post {
 	 * @throws UnexpectedValueException if $newPostId is not a UUID
 	 */
 
-	public function setPostId($newPostId) {
-		$newPostId = filter_var($newPostId, FILTER_V);
+	public function setPostId($newPostId) : void {
+		//verify the post id is valid
+		$newPostId = filter_var($newPostId,  );
 	}
 }
 
