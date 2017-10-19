@@ -7,8 +7,15 @@
  * @author Korigan Payne <kpayne11@cnm.edu>
  * @version 7.1
  **/
+namespace Edu\Cnm\DataDesign;
 
-class Post {
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+
+use Ramsey\Uuid\Uuid;
+
+
+class Post implements \JsonSerializable {
 	/**
 	 * id for this Post; this is the primary key
 	 */
@@ -44,7 +51,7 @@ class Post {
 
 	public function setPostId($newPostId) : void {
 		//verify the post id is valid
-		$newPostId = filter_var($newPostId,  );
+
 	}
 }
 
