@@ -85,6 +85,7 @@
 					<li>commentsId</li>
 					<li>commentsProfileId (foreign key)</li>
 					<li>commentsPostId (foreign key)</li>
+					<li>commentsCommentsId (foreign key)</li>
 					<li>commentsContent</li>
 					<li>commentsDate</li>
 				</ul>

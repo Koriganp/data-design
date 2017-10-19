@@ -28,12 +28,14 @@ CREATE TABLE comments (
 	commentsId BINARY(16) NOT NULL,
 	commentsProfileId BINARY(16) NOT NULL,
 	commentsPostId BINARY(16) NOT NULL,
+	commentsCommentsId BINARY(16) NOT NULL,
 	commentsContent VARCHAR(65535) NOT NULL,
 	commentsDate DATETIME(6) NOT NULL,
 	INDEX(commentsProfileId),
 	INDEX(commentsPostId),
 	FOREIGN KEY(commentsProfileId) REFERENCES profile(profileId),
 	FOREIGN KEY(commentsPostId) REFERENCES post(postId),
+	FOREIGN KEY (commentsCommentsId) REFERENCES comments(commentsId),
 	PRIMARY KEY(commentsId)
 );
 
