@@ -9,6 +9,7 @@
  **/
 namespace Edu\Cnm\DataDesign;
 
+require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
@@ -19,18 +20,22 @@ class Post implements \JsonSerializable {
 	use ValidateDate;
 	/**
 	 * id for this Post; this is the primary key
+	 * @var Uuid $postId
 	 */
 	private $postId;
 	/**
-	 *id for the Profile who owns this Post; this is a foreign key
+	 * id for the Profile who owns this Post; this is a foreign key
+	 * @var Uuid $postProfileId
 	 */
 	private $postProfileId;
 	/**
-	 *this is the content of the post
+	 * this is the content of the post
+	 * @var string $postContent
 	 */
 	private $postContent;
 	/**
 	 * this is the date post was created
+	 * @var \DateTime $postDate
 	 */
 	private $postDate;
 
@@ -85,13 +90,101 @@ class Post implements \JsonSerializable {
 				$exceptionType = get_class($exception);
 				throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		 //convert nad store the post
+		 //convert and store the post
 		$this->postId = $uuid;
 	}
 
+	/**
+	 * accessor method for post profile id
+	 *
+	 * @return Uuid value of post profile id
+	 */
 
+	public function getPostProfileId() {
+		return $this->postProfileId;
+	}
 
+	/**
+	 * mutator method for post profile id
+	 *
+	 * @param Uuid $newPostProfileId new value of post profile id
+	 * @throws \UnexpectedValueException if $newPostProfileId is not a UUID
+	 */
+	public function setPostProfileId($newPostProfileId) : void {
+		try {
+			$uuid = self::validateUuid($newPostProfileId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		//convert nad store the post
+		$this->postProfileId = $uuid;
+	}
 
+	/**
+	 * accessor method for post content
+	 *
+	 * @return string value of post content
+	 */
+	public function getPostContent() {
+		return $this->postContent;
+	}
+
+	/**
+	 * mutator method for post content
+	 *
+	 * @param string $newPostContent new value of post content
+	 * @throws \InvalidArgumentException if $newPostContent is not a string or insecure
+	 * @throws \RangeException if $newPostContent is > 65535 characters
+	 *@throws \TypeError if $newPostContent is not a string
+	 */
+	public function setPostContent($newPostContent) : void {
+		//verify the post content is secure
+		$newPostContent = trim($newPostContent);
+		$newPostContent = filter_var($newPostContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newPostContent) === true) {
+			throw(new \InvalidArgumentException("post content is empty or insecure"));
+		}
+
+		//verify the post content will fit in the database
+		if(strlen($newPostContent) > 65535) {
+			throw(new \RangeException("post content too large"));
+		}
+
+		//store the post content
+		$this->postContent = $newPostContent;
+	}
+
+	/**
+	 * @return \DateTime value of post date
+	 */
+	public function getPostDate() : \DateTime {
+		return($this->postDate);
+	}
+
+	/**
+	 * mutator method for post date
+	 *
+	 * @param \DateTime|string|null $newPostDate post date as a DateTime object or string (or null to load the current time)
+	 * @throws \InvalidArgumentException if $newPostDate is not a valid object or string
+	 * @throws \RangeException if $newPostDate is a date that does not exist
+	 **/
+	public function setPostDate($newPostDate = null) : void {
+		// base case: if the date is null, use the current date and time
+		if($newPostDate === null) {
+			$this->postDate = new \DateTime();
+			return;
+		}
+
+		// store the like date using the ValidateDate trait
+		try {
+			$newPostDate = self::validateDateTime($newPostDate);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		$this->postDate = $newPostDate;
+	}
 
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
