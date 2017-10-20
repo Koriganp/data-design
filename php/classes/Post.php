@@ -132,7 +132,7 @@ class Post implements \JsonSerializable {
 	 *
 	 * @param string $newPostContent new value of post content
 	 * @throws \InvalidArgumentException if $newPostContent is not a string or insecure
-	 * @throws \RangeException if $newPostContent is > 60000 characters
+	 * @throws \RangeException if $newPostContent is > 3000 characters
 	 *@throws \TypeError if $newPostContent is not a string
 	 **/
 	public function setPostContent($newPostContent) : void {
@@ -143,7 +143,7 @@ class Post implements \JsonSerializable {
 			throw(new \InvalidArgumentException("post content is empty or insecure"));
 		}
 		//verify the post content will fit in the database
-		if(strlen($newPostContent) > 60000) {
+		if(strlen($newPostContent) > 3000) {
 			throw(new \RangeException("post content too large"));
 		}
 		//store the post content

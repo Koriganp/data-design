@@ -17,7 +17,7 @@ CREATE TABLE profile (
 CREATE TABLE post (
 	postId BINARY(16) NOT NULL,
 	postProfileId BINARY(16) NOT NULL,
-	postContent VARCHAR(60000) NOT NULL,
+	postContent VARCHAR(3000) NOT NULL,
 	postDate DATETIME(6) NOT NULL,
 	INDEX (postProfileId),
 	FOREIGN KEY(postProfileId) REFERENCES profile(profileId),
@@ -29,7 +29,7 @@ CREATE TABLE comments (
 	commentsProfileId BINARY(16) NOT NULL,
 	commentsPostId BINARY(16) NOT NULL,
 	commentsCommentsId BINARY(16),
-	commentsContent VARCHAR(60000) NOT NULL,
+	commentsContent VARCHAR(3000) NOT NULL,
 	commentsDate DATETIME(6) NOT NULL,
 	INDEX(commentsProfileId),
 	INDEX(commentsPostId),

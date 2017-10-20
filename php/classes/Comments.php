@@ -198,7 +198,7 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @param string $newCommentsContent new value of comments content
 	 * @throws \InvalidArgumentException if $newCommentsContent is not a string or insecure
-	 * @throws \RangeException if $newCommentsContent is > 60000 characters
+	 * @throws \RangeException if $newCommentsContent is > 3000 characters
 	 *@throws \TypeError if $newCommentsContent is not a string
 	 **/
 	public function setCommentsContent($newCommentsContent) : void {
@@ -209,7 +209,7 @@ class Comments implements \JsonSerializable {
 			throw(new \InvalidArgumentException("comments content is empty or insecure"));
 		}
 		//verify the comments content will fit in the database
-		if(strlen($newCommentsContent) > 60000) {
+		if(strlen($newCommentsContent) > 3000) {
 			throw(new \RangeException("comments content too large"));
 		}
 		//store the comments content
