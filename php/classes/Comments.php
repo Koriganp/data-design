@@ -22,6 +22,11 @@ class Comments implements \JsonSerializable {
 	 * id for this comments; this is the primary key
 	 * @var Uuid $commentsId
 	 **/
+	private $commentsId;
+	/**
+	 * id for the profile this comments is assigned to; this is a foreign key
+	 * @var Uuid $commentsProfileId
+	 **/
 	private $commentsProfileId;
 	/**
 	 * id for the post this comments is on; this is a foreign key
