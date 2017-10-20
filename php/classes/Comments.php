@@ -21,32 +21,27 @@ class Comments implements \JsonSerializable {
 	/**
 	 * id for this comments; this is the primary key
 	 * @var Uuid $commentsId
-	 */
-	private $commentsId;
-	/**
-	 * id for the Profile who owns this comments; this is a foreign key
-	 * @var Uuid $commentsProfileId
-	 */
+	 **/
 	private $commentsProfileId;
 	/**
 	 * id for the post this comments is on; this is a foreign key
 	 * @var Uuid $commentsPostId
-	 */
+	 **/
 	private $commentsPostId;
 	/**
 	 * id for the comments this comments is on; this is a recursive foreign key
 	 * @var Uuid $commentsCommentsId
-	 */
+	 **/
 	private $commentsCommentsId;
 	/**
 	 * this is the content of the comments
 	 * @var string $commentsContent
-	 */
+	 **/
 	private $commentsContent;
 	/**
 	 * this is the date comments was created
 	 * @var \DateTime $commentsDate
-	 */
+	 **/
 	private $commentsDate;
 
 	/**
@@ -84,7 +79,7 @@ class Comments implements \JsonSerializable {
 	 * accessor method for comments id
 	 *
 	 * @return Uuid value of comments id
-	 */
+	 **/
 	public function getCommentsId(): Uuid {
 		return $this->commentsId;
 	}
@@ -94,7 +89,7 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @param Uuid $newCommentsId new value of comments id
 	 * @throws \UnexpectedValueException if $newCommentsId is not a UUID
-	 */
+	 **/
 	public function setCommentsId($newCommentsId) : void {
 		try {
 			$uuid = self::validateUuid($newCommentsId);
@@ -110,7 +105,7 @@ class Comments implements \JsonSerializable {
 	 * accessor method for comments profile id
 	 *
 	 * @return Uuid value of comments profile id
-	 */
+	 **/
 	public function getCommentsProfileId() {
 		return $this->commentsProfileId;
 	}
@@ -120,7 +115,7 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @param Uuid $newCommentsProfileId new value of comments profile id
 	 * @throws \UnexpectedValueException if $newCommentsProfileId is not a UUID
-	 */
+	 **/
 	public function setCommentsProfileId($newCommentsProfileId) : void {
 		try {
 			$uuid = self::validateUuid($newCommentsProfileId);
@@ -136,7 +131,7 @@ class Comments implements \JsonSerializable {
 	 * accessor method for comments post id
 	 *
 	 * @return Uuid value of comments post id
-	 */
+	 **/
 	public function getCommentsPostId() {
 		return $this->commentsPostId;
 	}
@@ -146,7 +141,7 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @param Uuid $newCommentsPostId new value of comments post id
 	 * @throws \UnexpectedValueException if $newCommentsPostId is not a UUID
-	 */
+	 **/
 	public function setCommentsPostId($newCommentsPostId) : void {
 		try {
 			$uuid = self::validateUuid($newCommentsPostId);
@@ -162,7 +157,7 @@ class Comments implements \JsonSerializable {
 	 * accessor method for comments comments id
 	 *
 	 * @return Uuid value of comments comments id
-	 */
+	 **/
 	public function getCommentsCommentsId() {
 		return $this->commentsCommentsId;
 	}
@@ -172,7 +167,7 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @param Uuid $newCommentsCommentsId new value of comments comments id
 	 * @throws \UnexpectedValueException if $newCommentsCommentsId is not a UUID
-	 */
+	 **/
 	public function setCommentsCommentsId($newCommentsCommentsId) : void {
 		try {
 			$uuid = self::validateUuid($newCommentsCommentsId);
@@ -188,7 +183,7 @@ class Comments implements \JsonSerializable {
 	 * accessor method for comments content
 	 *
 	 * @return string value of comments content
-	 */
+	 **/
 	public function getCommentsContent() {
 		return $this->commentsContent;
 	}
@@ -200,7 +195,7 @@ class Comments implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if $newCommentsContent is not a string or insecure
 	 * @throws \RangeException if $newCommentsContent is > 60000 characters
 	 *@throws \TypeError if $newCommentsContent is not a string
-	 */
+	 **/
 	public function setCommentsContent($newCommentsContent) : void {
 		//verify the post content is secure
 		$newCommentsContent = trim($newCommentsContent);
@@ -218,7 +213,7 @@ class Comments implements \JsonSerializable {
 
 	/**
 	 * @return \DateTime value of comments date
-	 */
+	 **/
 	public function getCommentsDate() : \DateTime {
 		return($this->commentsDate);
 	}

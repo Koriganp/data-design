@@ -21,17 +21,17 @@ class Profile implements \JsonSerializable {
 	/**
 	 * id for this profile; this is the primary key
 	 * @var Uuid $profileId
-	 */
+	 **/
 	private $profileId;
 	/**
 	 * token handed out to verify that the profile is valid and not malicious
 	 * @var $profileActivationToken
-	 */
+	 **/
 	private $profileActivationToken;
 	/**
 	 * User name of this profile; this is a unique index
 	 * @var string $profileUserName
-	 */
+	 **/
 	private $profileUserName;
 	/**
 	 * email for this Profile; this is a unique index
@@ -46,7 +46,7 @@ class Profile implements \JsonSerializable {
 	/**
 	 * salt for profile password
 	 * @var $profileSalt
-	 */
+	 **/
 	private $profileSalt;
 
 	/**
@@ -140,7 +140,7 @@ class Profile implements \JsonSerializable {
 	 * accessor method for account activation token
 	 *
 	 * @return string value of the activation token
-	 */
+	 **/
 	public function getProfileActivationToken() : ?string {
 		return ($this->profileActivationToken);
 	}
@@ -152,7 +152,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException  if the token is not a string or insecure
 	 * @throws \RangeException if the token is not exactly 32 characters
 	 * @throws \TypeError if the activation token is not a string
-	 */
+	 **/
 	public function setProfileActivationToken(?string $newProfileActivationToken): void {
 		if($newProfileActivationToken === null) {
 			$this->profileActivationToken = null;
@@ -203,7 +203,7 @@ class Profile implements \JsonSerializable {
 	/**
 	 * accessor method for profileHash
 	 * @return string value of hash
-	 */
+	 **/
 	public function getProfileHash(): string {
 		return $this->profileHash;
 	}
@@ -215,7 +215,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if the hash is not secure
 	 * @throws \RangeException if the hash is not 128 characters
 	 * @throws \TypeError if profile hash is not a string
-	 */
+	 **/
 	public function setProfileHash(string $newProfileHash): void {
 		//enforce that the hash is properly formatted
 		$newProfileHash = trim($newProfileHash);
@@ -238,7 +238,7 @@ class Profile implements \JsonSerializable {
 	/**
 	 *accessor method for profile salt
 	 * @return string representation of the salt hexadecimal
-	 */
+	 **/
 	public function getProfileSalt(): string {
 		return $this->profileSalt;
 	}
@@ -250,7 +250,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if the salt is not secure
 	 * @throws \RangeException if the salt is not 64 characters
 	 * @throws \TypeError if profile salt is not a string
-	 */
+	 **/
 	public function setProfileSalt(string $newProfileSalt): void {
 		//enforce that the salt is properly formatted
 		$newProfileSalt = trim($newProfileSalt);

@@ -21,22 +21,22 @@ class Post implements \JsonSerializable {
 	/**
 	 * id for this Post; this is the primary key
 	 * @var Uuid $postId
-	 */
+	 **/
 	private $postId;
 	/**
 	 * id for the Profile who owns this Post; this is a foreign key
 	 * @var Uuid $postProfileId
-	 */
+	 **/
 	private $postProfileId;
 	/**
 	 * this is the content of the post
 	 * @var string $postContent
-	 */
+	 **/
 	private $postContent;
 	/**
 	 * this is the date post was created
 	 * @var \DateTime $postDate
-	 */
+	 **/
 	private $postDate;
 
 	/**
@@ -70,7 +70,7 @@ class Post implements \JsonSerializable {
 	 * accessor method for post id
 	 *
 	 * @return Uuid value of post id
-	 */
+	 **/
 	public function getPostId(): Uuid {
 		return $this->postId;
 	}
@@ -80,7 +80,7 @@ class Post implements \JsonSerializable {
 	 *
 	 * @param Uuid $newPostId new value of post id
 	 * @throws \UnexpectedValueException if $newPostId is not a UUID
-	 */
+	 **/
 	public function setPostId($newPostId) : void {
 		try {
 			$uuid = self::validateUuid($newPostId);
@@ -96,7 +96,7 @@ class Post implements \JsonSerializable {
 	 * accessor method for post profile id
 	 *
 	 * @return Uuid value of post profile id
-	 */
+	 **/
 	public function getPostProfileId() {
 		return $this->postProfileId;
 	}
@@ -106,7 +106,7 @@ class Post implements \JsonSerializable {
 	 *
 	 * @param Uuid $newPostProfileId new value of post profile id
 	 * @throws \UnexpectedValueException if $newPostProfileId is not a UUID
-	 */
+	 **/
 	public function setPostProfileId($newPostProfileId) : void {
 		try {
 			$uuid = self::validateUuid($newPostProfileId);
@@ -122,7 +122,7 @@ class Post implements \JsonSerializable {
 	 * accessor method for post content
 	 *
 	 * @return string value of post content
-	 */
+	 **/
 	public function getPostContent() {
 		return $this->postContent;
 	}
@@ -134,7 +134,7 @@ class Post implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if $newPostContent is not a string or insecure
 	 * @throws \RangeException if $newPostContent is > 60000 characters
 	 *@throws \TypeError if $newPostContent is not a string
-	 */
+	 **/
 	public function setPostContent($newPostContent) : void {
 		//verify the post content is secure
 		$newPostContent = trim($newPostContent);
@@ -154,7 +154,7 @@ class Post implements \JsonSerializable {
 	 * accessor method for post date
 	 *
 	 * @return \DateTime value of post date
-	 */
+	 **/
 	public function getPostDate() : \DateTime {
 		return($this->postDate);
 	}
