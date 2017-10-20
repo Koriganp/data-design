@@ -64,7 +64,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct(Uuid $newProfileId, string $newProfileUserName, ?string $newProfileActivationToken, string $newProfileEmail, string $newProfileHash, string $newProfileSalt) {
+	public function __construct($newProfileId, string $newProfileUserName, ?string $newProfileActivationToken, string $newProfileEmail, string $newProfileHash, string $newProfileSalt) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileUserName($newProfileUserName);
