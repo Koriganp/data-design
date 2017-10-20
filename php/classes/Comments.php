@@ -20,7 +20,7 @@ class Comments implements \JsonSerializable {
 	use ValidateDate;
 	/**
 	 * id for this comments; this is the primary key
-	 * @var Uuid $postId
+	 * @var Uuid $commentsId
 	 */
 	private $commentsId;
 	/**
@@ -29,7 +29,7 @@ class Comments implements \JsonSerializable {
 	 */
 	private $commentsProfileId;
 	/**
-	 * id for the Post this comments is on; this is a foreign key
+	 * id for the post this comments is on; this is a foreign key
 	 * @var Uuid $commentsPostId
 	 */
 	private $commentsPostId;
@@ -52,11 +52,11 @@ class Comments implements \JsonSerializable {
 	/**
 	 * constructor for this Comments
 	 *
-	 * @param Uuid $newCommentsId id of this Post or null if a new Comments
-	 * @param Uuid $newCommentsProfileId id of the Profile that wrote this Comments
-	 * @param Uuid $newCommentsPostId id of the Post this Comments is on
+	 * @param Uuid $newCommentsId id of this comments or null if a new comments
+	 * @param Uuid $newCommentsProfileId id of the Profile that wrote this comments
+	 * @param Uuid $newCommentsPostId id of the Post this comments is on
 	 * @param Uuid $newCommentsCommentsId id of the comments this comments is on
-	 * @param string $newCommentsContent string containing actual Comments data
+	 * @param string $newCommentsContent string containing actual comments data
 	 * @param \DateTime|string|null $newCommentsDate date and time comments was made or null if set to current date and time
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
@@ -64,7 +64,6 @@ class Comments implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-
 	public function __construct($newCommentsId, $newCommentsProfileId, $newCommentsPostId, $newCommentsCommentsId, string $newCommentsContent, $newCommentsDate = null) {
 		try {
 			$this->setCommentsId($newCommentsId);
@@ -93,10 +92,9 @@ class Comments implements \JsonSerializable {
 	/**
 	 * mutator method for comments id
 	 *
-	 * @param Uuid $newCommentsId new value of post id
+	 * @param Uuid $newCommentsId new value of comments id
 	 * @throws \UnexpectedValueException if $newCommentsId is not a UUID
 	 */
-
 	public function setCommentsId($newCommentsId) : void {
 		try {
 			$uuid = self::validateUuid($newCommentsId);
@@ -113,7 +111,6 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @return Uuid value of comments profile id
 	 */
-
 	public function getCommentsProfileId() {
 		return $this->commentsProfileId;
 	}
@@ -140,7 +137,6 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @return Uuid value of comments post id
 	 */
-
 	public function getCommentsPostId() {
 		return $this->commentsPostId;
 	}
@@ -167,7 +163,6 @@ class Comments implements \JsonSerializable {
 	 *
 	 * @return Uuid value of comments comments id
 	 */
-
 	public function getCommentsCommentsId() {
 		return $this->commentsCommentsId;
 	}
@@ -213,12 +208,10 @@ class Comments implements \JsonSerializable {
 		if(empty($newCommentsContent) === true) {
 			throw(new \InvalidArgumentException("comments content is empty or insecure"));
 		}
-
 		//verify the comments content will fit in the database
 		if(strlen($newCommentsContent) > 60000) {
 			throw(new \RangeException("comments content too large"));
 		}
-
 		//store the comments content
 		$this->commentsContent = $newCommentsContent;
 	}
@@ -243,7 +236,6 @@ class Comments implements \JsonSerializable {
 			$this->commentsDate = new \DateTime();
 			return;
 		}
-
 		// store the comments date using the ValidateDate trait
 		try {
 			$newCommentsDate = self::validateDateTime($newCommentsDate);

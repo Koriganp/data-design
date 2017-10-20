@@ -52,7 +52,6 @@ class Post implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-
 	public function __construct($newPostId, $newPostProfileId, string $newPostContent, $newPostDate = null) {
 		try {
 			$this->setPostId($newPostId);
@@ -82,7 +81,6 @@ class Post implements \JsonSerializable {
 	 * @param Uuid $newPostId new value of post id
 	 * @throws \UnexpectedValueException if $newPostId is not a UUID
 	 */
-
 	public function setPostId($newPostId) : void {
 		try {
 			$uuid = self::validateUuid($newPostId);
@@ -99,7 +97,6 @@ class Post implements \JsonSerializable {
 	 *
 	 * @return Uuid value of post profile id
 	 */
-
 	public function getPostProfileId() {
 		return $this->postProfileId;
 	}
@@ -117,7 +114,7 @@ class Post implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		//convert and store the post
+		//convert and store the post id
 		$this->postProfileId = $uuid;
 	}
 
@@ -145,17 +142,17 @@ class Post implements \JsonSerializable {
 		if(empty($newPostContent) === true) {
 			throw(new \InvalidArgumentException("post content is empty or insecure"));
 		}
-
 		//verify the post content will fit in the database
 		if(strlen($newPostContent) > 60000) {
 			throw(new \RangeException("post content too large"));
 		}
-
 		//store the post content
 		$this->postContent = $newPostContent;
 	}
 
 	/**
+	 * accessor method for post date
+	 *
 	 * @return \DateTime value of post date
 	 */
 	public function getPostDate() : \DateTime {
@@ -175,7 +172,6 @@ class Post implements \JsonSerializable {
 			$this->postDate = new \DateTime();
 			return;
 		}
-
 		// store the post date using the ValidateDate trait
 		try {
 			$newPostDate = self::validateDateTime($newPostDate);
