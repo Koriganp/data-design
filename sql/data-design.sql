@@ -28,7 +28,7 @@ CREATE TABLE comments (
 	commentsId BINARY(16) NOT NULL,
 	commentsProfileId BINARY(16) NOT NULL,
 	commentsPostId BINARY(16) NOT NULL,
-	commentsCommentsId BINARY(16) NOT NULL,
+	commentsCommentsId BINARY(16),
 	commentsContent VARCHAR(60000) NOT NULL,
 	commentsDate DATETIME(6) NOT NULL,
 	INDEX(commentsProfileId),
