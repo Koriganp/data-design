@@ -117,7 +117,7 @@ class Post implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		//convert nad store the post
+		//convert and store the post
 		$this->postProfileId = $uuid;
 	}
 
@@ -135,7 +135,7 @@ class Post implements \JsonSerializable {
 	 *
 	 * @param string $newPostContent new value of post content
 	 * @throws \InvalidArgumentException if $newPostContent is not a string or insecure
-	 * @throws \RangeException if $newPostContent is > 65535 characters
+	 * @throws \RangeException if $newPostContent is > 60000 characters
 	 *@throws \TypeError if $newPostContent is not a string
 	 */
 	public function setPostContent($newPostContent) : void {
@@ -147,7 +147,7 @@ class Post implements \JsonSerializable {
 		}
 
 		//verify the post content will fit in the database
-		if(strlen($newPostContent) > 65535) {
+		if(strlen($newPostContent) > 60000) {
 			throw(new \RangeException("post content too large"));
 		}
 
@@ -176,7 +176,7 @@ class Post implements \JsonSerializable {
 			return;
 		}
 
-		// store the like date using the ValidateDate trait
+		// store the post date using the ValidateDate trait
 		try {
 			$newPostDate = self::validateDateTime($newPostDate);
 		} catch(\InvalidArgumentException | \RangeException $exception) {
