@@ -268,7 +268,10 @@ class Profile implements \JsonSerializable {
 	}
 
 
-
+	/**
+	 * formats the state variables for JSON serialize
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 

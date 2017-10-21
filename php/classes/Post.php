@@ -182,6 +182,12 @@ class Post implements \JsonSerializable {
 		$this->postDate = $newPostDate;
 	}
 
+
+
+	/**
+	 * formats the state variables for JSON serialize
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 
