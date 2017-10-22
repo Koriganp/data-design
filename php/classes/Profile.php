@@ -279,6 +279,7 @@ class Profile implements \JsonSerializable {
 		if($this->profileId !== null) {
 			throw(new \PDOException("not a new profile"));
 		}
+		/** @noinspection SqlResolve */
 		// create query template
 		$query = "INSERT INTO profile(profileId, profileActivationToken, profileUserName, profileEmail, profileHash, profileSalt) VALUES (:profileId, :profileActivationToken, :profileUserName, :profileEmail, :profileHash, :profileSalt)";
 		$statement = $pdo->prepare($query);
@@ -301,6 +302,7 @@ class Profile implements \JsonSerializable {
 		if($this->profileId === null) {
 			throw(new \PDOException("unable to delete a profile that does not exist"));
 		}
+		/** @noinspection SqlResolve */
 		//create query template
 		$query = "DELETE FROM profile WHERE profileId = :profileId";
 		$statement = $pdo->prepare($query);
@@ -321,7 +323,8 @@ class Profile implements \JsonSerializable {
 		if($this->profileId === null) {
 			throw(new \PDOException("unable to update a profile that does not exist"));
 		}
-//create query template
+		/** @noinspection SqlResolve */
+		//create query template
 		$query = "UPDATE profile SET profileId = :profileId, profileUserName = :profileUserName, profileActivationToken = :profileActivationToken, profileEmail = :profileEmail, profileHash = :profileHash, profileSalt = :profileSalt";
 		$statement = $pdo->prepare($query);
 		//bind the member variables to the place holders in the template
@@ -343,6 +346,7 @@ class Profile implements \JsonSerializable {
 		if($profileId<=0) {
 			throw(new \PDOException("profileId is not positive"));
 		}
+		/** @noinspection SqlResolve */
 		//create query template
 		$query="SELECT profileId, profileUserName, profileActivationToken, profileEmail, profileHash, profileSalt FROM profile WHERE profileId = :profileId";
 		$statement=$pdo->prepare($query);
@@ -381,10 +385,11 @@ class Profile implements \JsonSerializable {
 		if(empty($profileUserName) === true) {
 			throw(new \PDOException("not a valid user name"));
 		}
-// create query template
+		/** @noinspection SqlResolve */
+		// create query template
 		$query = "SELECT profileId, profileUserName, profileActivationToken, profileEmail, profileHash, profileSalt FROM profile WHERE profileUserName = :profileUserName";
 		$statement = $pdo->prepare($query);
-//bind the profile user name to the place holder in the template
+		//bind the profile user name to the place holder in the template
 		$parameters = ["profileUserName" => $profileUserName];
 		$statement->execute($parameters);
 		$profiles = new \SPLFixedArray($statement->rowCount());
@@ -417,7 +422,8 @@ class Profile implements \JsonSerializable {
 		if(ctype_xdigit($profileActivationToken) === false) {
 			throw(new \InvalidArgumentException("profile activation token is empty or in the wrong format"));
 		}
-//create the query template
+		//create the query template
+		/** @noinspection SqlResolve */
 		$query = "SELECT profileId, profileUserName, profileActivationToken, profileEmail, profileHash, profileSalt FROM profile WHERE profileActivationToken = :profileActivationToken";
 		$statement = $pdo->prepare($query);
 		//bind the profile activation token to the placeholder in the template
