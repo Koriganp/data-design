@@ -286,7 +286,6 @@ class Profile implements \JsonSerializable {
 		// bind the member variables to the place holders in the template
 		$parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileUserName" => $this->profileUserName, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileSalt" => $this->profileSalt];
 		$statement->execute($parameters);
-
 	}
 
 	/**
@@ -450,7 +449,6 @@ class Profile implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-
 		$fields["profileId"] = $this->profileId;
 		$fields["profileUserName"] = $this->profileUserName;
 		$fields["profileActivationToken"] = $this->profileActivationToken;
