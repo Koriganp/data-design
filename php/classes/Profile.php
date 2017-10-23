@@ -286,8 +286,7 @@ class Profile implements \JsonSerializable {
 		// bind the member variables to the place holders in the template
 		$parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileUserName" => $this->profileUserName, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileSalt" => $this->profileSalt];
 		$statement->execute($parameters);
-		// update the null profileId with what mySQL just gave us
-		$this->profileId = intval($pdo->lastInsertId());
+
 	}
 
 	/**
