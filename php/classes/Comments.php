@@ -359,19 +359,19 @@ class Comments implements \JsonSerializable {
 		$parameters = ["commentsProfileId" => $commentsProfileId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
-		$commentsB = new \SplFixedArray($statement->rowCount());
+		$commentsArray = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$comments = new Comments($row["commentsId"], $row["commentsProfileId"], $row["commentsPostId"], $row["commentsCommentsId"], $row["commentsContent"], $row["commentsDate"]);
-				$commentsB[$commentsB->key()] = $comments;
-				$commentsB->next();
+				$commentsArray[$commentsArray->key()] = $comments;
+				$commentsArray->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($commentsB);
+		return($commentsArray);
 	}
 
 	/**
@@ -397,19 +397,19 @@ class Comments implements \JsonSerializable {
 		$parameters = ["commentsProfileId" => $commentsPostId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
-		$commentsB = new \SplFixedArray($statement->rowCount());
+		$commentsArray = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$comments = new Comments($row["commentsId"], $row["commentsProfileId"], $row["commentsPostId"], $row["commentsCommentsId"], $row["commentsContent"], $row["commentsDate"]);
-				$commentsB[$commentsB->key()] = $comments;
-				$commentsB->next();
+				$commentsArray[$commentsArray->key()] = $comments;
+				$commentsArray->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($commentsB);
+		return($commentsArray);
 	}
 
 	/**
@@ -439,19 +439,19 @@ class Comments implements \JsonSerializable {
 		$parameters = ["commentsContent" => $commentsContent];
 		$statement->execute($parameters);
 		// build an array of posts
-		$commentsB = new \SplFixedArray($statement->rowCount());
+		$commentsArray = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$comments = new Comments($row["commentsId"], $row["commentsProfileId"], $row["commentsPostId"], $row["commentsCommentsId"], $row["commentsContent"], $row["commentsDate"]);
-				$commentsB[$commentsB->key()] = $comments;
-				$commentsB->next();
+				$commentsArray[$commentsArray->key()] = $comments;
+				$commentsArray->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($commentsB);
+		return($commentsArray);
 	}
 
 	/**
@@ -469,19 +469,19 @@ class Comments implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 		// build an array of comments
-		$commentsB = new \SplFixedArray($statement->rowCount());
+		$commentsArray = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$comments = new Comments($row["commentsId"], $row["commentsProfileId"], $row["commentsPostId"], $row["commentsCommentsId"], $row["commentsContent"], $row["commentsDate"]);
-				$commentsB[$commentsB->key()] = $comments;
-				$commentsB->next();
+				$commentsArray[$commentsArray->key()] = $comments;
+				$commentsArray->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return ($commentsB);
+		return ($commentsArray);
 	}
 
 	/**

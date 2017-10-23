@@ -389,7 +389,7 @@ class Post implements \JsonSerializable {
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($postDate);
+		return($post);
 	}
 
 	/**
