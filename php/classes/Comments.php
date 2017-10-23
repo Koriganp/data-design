@@ -307,7 +307,7 @@ class Comments implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getCommentsByCommentsId(\PDO $pdo, string $commentsId) : ?Comments {
+	public static function getCommentsByCommentsId(\PDO $pdo, $commentsId) : ?Comments {
 		// sanitize the commentsId before searching
 		try {
 			$commentsId = self::validateUuid($commentsId);
@@ -345,7 +345,7 @@ class Comments implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getCommentsByCommentsProfileId(\PDO $pdo, string  $commentsProfileId) : \SPLFixedArray {
+	public static function getCommentsByCommentsProfileId(\PDO $pdo, $commentsProfileId) : \SPLFixedArray {
 		try {
 			$commentsProfileId = self::validateUuid($commentsProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -383,7 +383,7 @@ class Comments implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getCommentsByCommentsPostId(\PDO $pdo, string  $commentsPostId) : \SPLFixedArray {
+	public static function getCommentsByCommentsPostId(\PDO $pdo, $commentsPostId) : \SPLFixedArray {
 		try {
 			$commentsPostId = self::validateUuid($commentsPostId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {

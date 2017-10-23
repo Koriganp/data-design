@@ -192,7 +192,7 @@ class Post implements \JsonSerializable {
 	public function insert(\PDO $pdo) : void {
 		/** @noinspection SqlResolve */
 		// create query template
-		$query = "INSERT INTO post(postId,postProfileId, postContent, postDate) VALUES(:postId, :postProfileId, :postContent, :postDate)";
+		$query = "INSERT INTO post(postId, postProfileId, postContent, postDate) VALUES(:postId, :postProfileId, :postContent, :postDate)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
 		$formattedDate = $this->postDate->format("Y-m-d H:i:s.u");
@@ -243,7 +243,7 @@ class Post implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getPostByPostId(\PDO $pdo, string $postId) : ?Post {
+	public static function getPostByPostId(\PDO $pdo, $postId) : ?Post {
 		// sanitize the postId before searching
 		try {
 			$postId = self::validateUuid($postId);
@@ -281,7 +281,7 @@ class Post implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getPostByPostProfileId(\PDO $pdo, string  $postProfileId) : \SPLFixedArray {
+	public static function getPostByPostProfileId(\PDO $pdo, $postProfileId) : \SPLFixedArray {
 		try {
 			$postProfileId = self::validateUuid($postProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -350,6 +350,46 @@ class Post implements \JsonSerializable {
 			}
 		}
 		return($posts);
+	}
+
+	/**
+	 * gets Post by Date
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param \DateTime $postDate date of post to search for
+	 * @return Post|null Post or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getPostByDate(\PDO $pdo) : \DateTime {
+		//sanitize date before searching
+		$postDate = trim($postDate);
+		$postDate = filter_var(self::validateDate($postDate));
+		if(empty($postDate) === true) {
+			throw(new \InvalidArgumentException("date is empty or insecure"));
+		}
+		/** @noinspection SqlResolve */
+		//create query template
+		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postDate = :postDate";
+		$statement = $pdo->prepare($query);
+		// bind the post content to the place holder in the template
+		$postDate = "postDate";
+		$parameters = ["postDate" => $postDate];
+		$statement->execute($parameters);
+		// build an array of posts
+		$posts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$post = new Post($row["postId"], $row["postProfileId"], $row["postContent"], $row["postDate"]);
+				$posts[$posts->key()] = $post;
+				$posts->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($postDate);
 	}
 
 	/**
