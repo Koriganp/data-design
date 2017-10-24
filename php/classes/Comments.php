@@ -467,7 +467,7 @@ class Comments implements \JsonSerializable {
 	public static function getCommentsByDate(\PDO $pdo, \DateTime $sunriseCommentsDate, \DateTime $sunsetCommentsDate) : \SplFixedArray {
 		//enforce both date are present
 		if((empty ($sunriseCommentsDate) === true) || (empty($sunsetCommentsDate) === true)) {
-			throw (new \InvalidArgumentException("dates are empty of insecure"));
+			throw (new \InvalidArgumentException("dates are empty or insecure"));
 		}
 		//ensure both dates are in the correct format and are secure
 		try {

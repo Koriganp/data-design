@@ -362,10 +362,10 @@ class Post implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getCommentsByDate(\PDO $pdo, \DateTime $sunrisePostDate, \DateTime $sunsetPostDate) : \SplFixedArray {
-		//enforce both date are present
+	public static function getPostByPostDate(\PDO $pdo, \DateTime $sunrisePostDate, \DateTime $sunsetPostDate) : \SplFixedArray {
+		//enforce both dates are present
 		if((empty ($sunrisePostDate) === true) || (empty($sunsetPostDate) === true)) {
-			throw (new \InvalidArgumentException("dates are empty of insecure"));
+			throw (new \InvalidArgumentException("dates are empty or insecure"));
 		}
 		//ensure both dates are in the correct format and are secure
 		try {
@@ -382,7 +382,7 @@ class Post implements \JsonSerializable {
 		//format the dates so that mySQL can use them
 		$formattedSunriseDate = $sunrisePostDate->format("Y-m-d H:i:s.u");
 		$formattedSunsetDate = $sunsetPostDate->format("Y-m-d H:i:s.u");
-		// bind the comments content to the place holder in the template
+		// bind the post content to the place holder in the template
 		$parameters = ["sunrisePostDate" => $formattedSunriseDate, "sunsetPostDate" => $formattedSunsetDate];
 		$statement->execute($parameters);
 		// build an array of comments
