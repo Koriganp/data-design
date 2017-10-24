@@ -455,6 +455,45 @@ class Comments implements \JsonSerializable {
 	}
 
 	/**
+	 * gets Comments by Date
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param \DateTime $commentsDate date of comments to search for
+	 * @return \SplFixedArray Comments or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getCommentsByDate(\PDO $pdo, $commentsDate) : \SplFixedArray {
+		//sanitize date before searching
+		$commentsDate = filter_var(self::validateDate($commentsDate));
+		if(empty($commentsDate) === true) {
+			throw(new \InvalidArgumentException("date is empty or insecure"));
+		}
+		/** @noinspection SqlResolve */
+		//create query template
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsDate >= :sunriseCommentsDate AND commentsDate <= :sunsetCommentsDate";
+		$statement = $pdo->prepare($query);
+		// bind the comments content to the place holder in the template
+		$commentsDate = "commentsDate";
+		$parameters = ["commentsDate" => $commentsDate];
+		$statement->execute($parameters);
+		// build an array of comments
+		$commentsArray = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$comments = new Comments($row["commentsId"], $row["commentsProfileId"], $row["commentsPostId"], $row["commentsCommentsId"], $row["commentsContent"], $row["commentsDate"]);
+				$comments[$commentsArray->key()] = $comments;
+				$commentsArray->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($commentsArray);
+	}
+
+	/**
 	 * gets all Comments
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -490,11 +529,10 @@ class Comments implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["commentsId"] = $this->commentsId;
-		$fields["commentsProfileId"] = $this->commentsProfileId;
-		$fields["commentsPostId"] = $this->commentsPostId;
-		$fields["commentsCommentsId"] = $this->commentsCommentsId;
-		$fields["commentsContent"] = $this->commentsContent;
+		$fields["commentsId"] = $this->commentsId->toString();
+		$fields["commentsProfileId"] = $this->commentsProfileId->toString();
+		$fields["commentsPostId"] = $this->commentsPostId->toString();
+		$fields["commentsCommentsId"] = $this->commentsCommentsId->toString();
 		//format the date so that the front end can consume it
 		$fields["commentsDate"] = round(floatval($this->commentsDate->format("U.u")) * 1000);
 		return($fields);

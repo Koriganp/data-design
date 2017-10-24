@@ -490,12 +490,9 @@ class Profile implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["profileId"] = $this->profileId;
-		$fields["profileUserName"] = $this->profileUserName;
-		$fields["profileActivationToken"] = $this->profileActivationToken;
-		$fields["profileEmail"] = $this->profileEmail;
-		$fields["profileHash"] = $this->profileHash;
-		$fields["profileSalt"] = $this->profileSalt;
+		$fields["profileId"] = $this->profileId->toString();
+		unset($fields["profileHash"] = $this->profileHash);
+		unset($fields["profileSalt"] = $this->profileSalt);
 		return($fields);
 	}
 }

@@ -353,24 +353,23 @@ class Post implements \JsonSerializable {
 	}
 
 	/**
-	 * gets Post by Date
+	 * gets Posts by Date
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $postDate date of post to search for
-	 * @return Post|null Post or null if not found
+	 * @param \DateTime $postDate date of posts to search for
+	 * @return \SplFixedArray Posts or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getPostByDate(\PDO $pdo) : \DateTime {
+	public static function getPostByDate(\PDO $pdo, $postDate) : \DateTime {
 		//sanitize date before searching
-		$postDate = trim($postDate);
-		$postDate = filter_var(self::validateDate($postDate));
+				$postDate = filter_var(self::validateDate($postDate));
 		if(empty($postDate) === true) {
 			throw(new \InvalidArgumentException("date is empty or insecure"));
 		}
 		/** @noinspection SqlResolve */
 		//create query template
-		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postDate = :postDate";
+		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postDate >= :sunrisePostDate AND postDate <= :sunsetPostDate";
 		$statement = $pdo->prepare($query);
 		// bind the post content to the place holder in the template
 		$postDate = "postDate";
@@ -382,14 +381,14 @@ class Post implements \JsonSerializable {
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$post = new Post($row["postId"], $row["postProfileId"], $row["postContent"], $row["postDate"]);
-				$posts[$posts->key()] = $post;
+				$post[$posts->key()] = $post;
 				$posts->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($post);
+		return($posts);
 	}
 
 	/**
@@ -428,9 +427,9 @@ class Post implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["postId"] = $this->postId;
-		$fields["postProfileId"] = $this->postProfileId;
-		$fields["postContent"] = $this->postContent;
+		$fields["postId"] = $this->postId->toString();
+		$fields["postProfileId"] = $this->postProfileId->toString();
+
 		//format the date so that the front end can consume it
 		$fields["postDate"] = round(floatval($this->postDate->format("U.u")) * 1000);
 		return($fields);
