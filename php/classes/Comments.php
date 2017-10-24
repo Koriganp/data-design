@@ -458,24 +458,34 @@ class Comments implements \JsonSerializable {
 	 * gets Comments by Date
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $commentsDate date of comments to search for
+	 * @param \DateTime $sunriseCommentsDate beginning date to search for
+	 * @param \DateTime $sunsetCommentsDate ending date to search for
 	 * @return \SplFixedArray Comments or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getCommentsByDate(\PDO $pdo, $commentsDate) : \SplFixedArray {
-		//sanitize date before searching
-		$commentsDate = filter_var(self::validateDate($commentsDate));
-		if(empty($commentsDate) === true) {
-			throw(new \InvalidArgumentException("date is empty or insecure"));
+	public static function getCommentsByDate(\PDO $pdo, \DateTime $sunriseCommentsDate, \DateTime $sunsetCommentsDate) : \SplFixedArray {
+		//enforce both date are present
+		if((empty ($sunriseCommentsDate) === true) || (empty($sunsetCommentsDate) === true)) {
+			throw (new \InvalidArgumentException("dates are empty of insecure"));
+		}
+		//ensure both dates are in the correct format and are secure
+		try {
+			$sunriseCommentsDate = self::validateDateTime($sunriseCommentsDate);
+			$sunsetCommentsDate = self::validateDateTime($sunsetCommentsDate);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		/** @noinspection SqlResolve */
 		//create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsDate >= :sunriseCommentsDate AND commentsDate <= :sunsetCommentsDate";
 		$statement = $pdo->prepare($query);
+		//format the dates so that mySQL can use them
+		$formattedSunriseDate = $sunriseCommentsDate->format("Y-m-d H:i:s.u");
+		$formattedSunsetDate = $sunsetCommentsDate->format("Y-m-d H:i:s.u");
 		// bind the comments content to the place holder in the template
-		$commentsDate = "commentsDate";
-		$parameters = ["commentsDate" => $commentsDate];
+		$parameters = ["sunriseCommentsDate" => $formattedSunriseDate, "sunsetCommentsDate" => $formattedSunsetDate];
 		$statement->execute($parameters);
 		// build an array of comments
 		$commentsArray = new \SplFixedArray($statement->rowCount());

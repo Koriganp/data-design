@@ -356,26 +356,36 @@ class Post implements \JsonSerializable {
 	 * gets Posts by Date
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $postDate date of posts to search for
+	 * @param \DateTime $sunrisePostDate beginning date to search for
+	 * @param \DateTime $sunsetPostDate ending date to search for
 	 * @return \SplFixedArray Posts or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getPostByDate(\PDO $pdo, $postDate) : \DateTime {
-		//sanitize date before searching
-				$postDate = filter_var(self::validateDate($postDate));
-		if(empty($postDate) === true) {
-			throw(new \InvalidArgumentException("date is empty or insecure"));
+	public static function getCommentsByDate(\PDO $pdo, \DateTime $sunrisePostDate, \DateTime $sunsetPostDate) : \SplFixedArray {
+		//enforce both date are present
+		if((empty ($sunrisePostDate) === true) || (empty($sunsetPostDate) === true)) {
+			throw (new \InvalidArgumentException("dates are empty of insecure"));
+		}
+		//ensure both dates are in the correct format and are secure
+		try {
+			$sunrisePostDate = self::validateDateTime($sunrisePostDate);
+			$sunsetPostDate = self::validateDateTime($sunsetPostDate);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		/** @noinspection SqlResolve */
 		//create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postDate >= :sunrisePostDate AND postDate <= :sunsetPostDate";
 		$statement = $pdo->prepare($query);
-		// bind the post content to the place holder in the template
-		$postDate = "postDate";
-		$parameters = ["postDate" => $postDate];
+		//format the dates so that mySQL can use them
+		$formattedSunriseDate = $sunrisePostDate->format("Y-m-d H:i:s.u");
+		$formattedSunsetDate = $sunsetPostDate->format("Y-m-d H:i:s.u");
+		// bind the comments content to the place holder in the template
+		$parameters = ["sunrisePostDate" => $formattedSunriseDate, "sunsetPostDate" => $formattedSunsetDate];
 		$statement->execute($parameters);
-		// build an array of posts
+		// build an array of comments
 		$posts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
