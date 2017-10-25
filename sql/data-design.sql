@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS profile;
+-- DROP TABLE IF EXISTS comments;
+-- DROP TABLE IF EXISTS post;
+-- DROP TABLE IF EXISTS profile;
 
 CREATE TABLE profile (
 	profileId BINARY(16) NOT NULL ,

@@ -10,7 +10,7 @@
 namespace Edu\Cnm\DataDesign;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -313,7 +313,7 @@ class Comments implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		// create query template
-		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsId = :commentsId";
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsId = :commentsId";
 		$statement = $pdo->prepare($query);
 		// bind the comments id to the place holder in the template
 		$parameters = ["commentsId" => $commentsId->getBytes()];
@@ -349,7 +349,7 @@ class Comments implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		// create query template
-		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsProfileId = :commentsProfileId";
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsProfileId = :commentsProfileId";
 		$statement = $pdo->prepare($query);
 		// bind the comments profile id to the place holder in the template
 		$parameters = ["commentsProfileId" => $commentsProfileId->getBytes()];
@@ -386,7 +386,7 @@ class Comments implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		// create query template
-		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsPostId = :commentsPostId";
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsPostId = :commentsPostId";
 		$statement = $pdo->prepare($query);
 		// bind the comments post id to the place holder in the template
 		$parameters = ["commentsProfileId" => $commentsPostId->getBytes()];
@@ -426,7 +426,7 @@ class Comments implements \JsonSerializable {
 		// escape any mySQL wild cards
 		$commentsContent = str_replace("_", "\\_", str_replace("%", "\\%", $commentsContent));
 		// create query template
-		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsContent LIKE :commentsContent";
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsContent LIKE :commentsContent";
 		$statement = $pdo->prepare($query);
 		// bind the comments content to the place holder in the template
 		$commentsContent = "%$commentsContent%";
@@ -506,7 +506,7 @@ class Comments implements \JsonSerializable {
 	 **/
 	public static function getAllComments(\PDO $pdo) : \SPLFixedArray {
 		// create query template
-		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments";
+		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 		// build an array of comments
