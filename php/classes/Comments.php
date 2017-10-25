@@ -272,7 +272,6 @@ class Comments implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo) : void {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "DELETE FROM comments WHERE commentsId = :commentsId";
 		$statement = $pdo->prepare($query);
@@ -289,7 +288,6 @@ class Comments implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function update(\PDO $pdo) : void {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "UPDATE comments SET commentsProfileId = :commentsProfileId, commentsPostId = :commentsPostId, commentsCommentsId = :commentsCommentsId, commentsContent = :commentsContent, commentsDate = :commentsDate WHERE commentsId = :commentsId";
 		$statement = $pdo->prepare($query);
@@ -314,7 +312,6 @@ class Comments implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsId = :commentsId";
 		$statement = $pdo->prepare($query);
@@ -351,7 +348,6 @@ class Comments implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsProfileId = :commentsProfileId";
 		$statement = $pdo->prepare($query);
@@ -389,7 +385,6 @@ class Comments implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsPostId = :commentsPostId";
 		$statement = $pdo->prepare($query);
@@ -430,7 +425,6 @@ class Comments implements \JsonSerializable {
 		}
 		// escape any mySQL wild cards
 		$commentsContent = str_replace("_", "\\_", str_replace("%", "\\%", $commentsContent));
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments WHERE commentsContent LIKE :commentsContent";
 		$statement = $pdo->prepare($query);
@@ -477,7 +471,6 @@ class Comments implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		//create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentsCommentsId, commentsContent, commentsDate FROM comments WHERE commentsDate >= :sunriseCommentsDate AND commentsDate <= :sunsetCommentsDate";
 		$statement = $pdo->prepare($query);
@@ -512,7 +505,6 @@ class Comments implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getAllComments(\PDO $pdo) : \SPLFixedArray {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT commentsId, commentsProfileId, commentsPostId, commentCommentsId, commentsContent, commentsDate FROM comments";
 		$statement = $pdo->prepare($query);

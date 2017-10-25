@@ -190,7 +190,6 @@ class Post implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert(\PDO $pdo) : void {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "INSERT INTO post(postId, postProfileId, postContent, postDate) VALUES(:postId, :postProfileId, :postContent, :postDate)";
 		$statement = $pdo->prepare($query);
@@ -208,7 +207,6 @@ class Post implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo) : void {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "DELETE FROM post WHERE postId = :postId";
 		$statement = $pdo->prepare($query);
@@ -225,7 +223,6 @@ class Post implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function update(\PDO $pdo) : void {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "UPDATE post SET postProfileId = :postProfileId, postContent = :postContent, postDate = :postDate WHERE postId = :postId";
 		$statement = $pdo->prepare($query);
@@ -250,7 +247,6 @@ class Post implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postId = :postId";
 		$statement = $pdo->prepare($query);
@@ -287,7 +283,6 @@ class Post implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postProfileId = :postProfileId";
 		$statement = $pdo->prepare($query);
@@ -328,7 +323,6 @@ class Post implements \JsonSerializable {
 		}
 				// escape any mySQL wild cards
 		$postContent = str_replace("_", "\\_", str_replace("%", "\\%", $postContent));
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postContent LIKE :postContent";
 		$statement = $pdo->prepare($query);
@@ -375,7 +369,6 @@ class Post implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		/** @noinspection SqlResolve */
 		//create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post WHERE postDate >= :sunrisePostDate AND postDate <= :sunsetPostDate";
 		$statement = $pdo->prepare($query);
@@ -410,7 +403,6 @@ class Post implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getAllPosts(\PDO $pdo) : \SPLFixedArray {
-		/** @noinspection SqlResolve */
 		// create query template
 		$query = "SELECT postId, postProfileId, postContent, postDate FROM post";
 		$statement = $pdo->prepare($query);
